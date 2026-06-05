@@ -1,0 +1,29 @@
+{
+    "name" : "",
+    "appid" : "",
+    "description" : "",
+    "versionName" : "1.0.0",
+    "versionCode" : "100",
+    "transformPx" : false,
+    "uniStatistics": {  
+        "enable": false
+    },
+    "vueVersion" : "3",
+    "h5" : {
+        "devServer" : {
+            "disableHostCheck" : true,
+            "proxy" : {},
+            "port" : 2307,
+            "https" : false
+        },
+        "router" : {
+            "mode" : "history",
+            "base" : ""
+        },
+        "optimization" : {
+            "treeShaking" : {
+                "enable" : true
+            }
+        }
+    }
+}

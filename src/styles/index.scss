@@ -1,0 +1,156 @@
+@import './transition.scss';
+html {
+  height: 100%;
+  font-size: 100px;
+  overflow: hidden;
+}
+body {
+  height: 100%;
+  font-size: .28rem;
+  overflow: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+
+#app {
+  height: 100%;
+  overflow: auto;
+  font-size: .28rem;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ul,
+ol {
+  list-style: none;
+}
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+.pr {
+  position: relative;
+}
+.pa {
+  position: absolute;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+.clearfix:after,.clearfix:before{
+    content:'';
+    display: table;
+}
+.clearfix:after{
+    clear: both;
+}
+.clearfix{
+    *zoom: 1;
+}
+.red{
+  color: red;
+}
+// =========================超出1行省略号============
+.line_ovh {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// =========================超出三行省略号============
+.line_over {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+// ===============修改scroll样式====父级容器设置类名===子集会继承========
+.scroll_c {
+  //兼容火狐
+  /*三角箭头的颜色*/
+  scrollbar-arrow-color: #CDD0E0;
+  /*滚动条滑块按钮的颜色*/
+  scrollbar-face-color: rgba(250, 250, 250, 0.3);
+  /*滚动条整体颜色*/
+  scrollbar-highlight-color: #CDD0E0;
+  /*滚动条阴影*/
+  scrollbar-shadow-color: rgba(250, 250, 250, 0.3);
+  /*滚动条轨道颜色*/
+  scrollbar-track-color: #CDD0E0;
+
+  & ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #CDD0E0;
+    border-radius: 6px;
+  }
+
+  & ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(250, 250, 250, 0.3);
+    border-radius: 6px;
+    background-color: #E3E5ED;
+  }
+
+  & ::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    -webkit-box-shadow: inset 0 0 6px rgba(250, 250, 250, 0.3);
+    background-color: #abb5c5;
+    cursor: pointer;
+  }
+}
+.page-title{
+    font-size: .36rem;
+    color: #333C5A;
+    font-weight: 600;
+    line-height: .50rem;
+    height: 0.5rem;
+    margin-bottom: .32rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding-left: 9px;
+    &::after{
+      content: " ";
+      position: absolute;
+      width: .08rem;
+      height: .36rem;
+      left: 0px;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      transform: translateY(-50%);
+      background: #0CB518;
+    }
+}
+
+
+@media (max-width: 750px) {
+  html {
+    font-size: 100px;
+    /* 小屏幕时的基准值 */
+  }
+}

@@ -49,7 +49,11 @@ import { getUrlScheme } from '@/api/index'
 const title = useUserStore().username
 
 onMounted(() => {
-    wxConfig()
+    if (isWeixin()) {
+        wxConfig()
+    } else {
+        getScheme()
+    }
 })
 
 const openMiniProgram = () => {
@@ -66,8 +70,17 @@ const getScheme = async () => {
 }
 
 const dialogVisible = ref(false)
-const handleOpen = () => {
-    dialogVisible.value = true
+const handleOpen = (type) => {
+    if (type === 1) {
+        uni.navigateTo({
+            url: '/pages/privacyPolicy/index'
+        })
+    } else {
+        uni.navigateTo({
+            url: '/pages/authOrder/index'
+        })
+    }
+    // dialogVisible.value = true
 }
 const handleClose = () => {
     dialogVisible.value = false

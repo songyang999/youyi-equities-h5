@@ -5,6 +5,18 @@
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
+		},
+		{
+			"path": "pages/authOrder/index",
+			"style": {
+				"navigationBarTitleText": "扣款授权确认书"
+			}
+		},
+		{
+			"path": "pages/privacyPolicy/index",
+			"style": {
+				"navigationBarTitleText": "权益平台隐私保护协议"
+			}
 		}
 	],
 	"globalStyle": {

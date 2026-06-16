@@ -4,7 +4,6 @@ import { getWxConfig } from '@/api/index'
 export const wxConfig = async () => {
     try {
         const res = await getWxConfig({ url: window.location.href })
-        console.log('res', res)
         const data = res.data || {}
         wx.config({
             appId: data.appId, // 必填，公众号的唯一标识

@@ -1,3 +1,3 @@
 export default {
-    BASE_API: ''
+    BASE_API: 'https://quanyi.xinruivr.com'
 }

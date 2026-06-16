@@ -1,21 +1,17 @@
 <template>
     <view class="page">
-        <image class="section-img" mode="widthFix" src="@/assets/images/video_1.png" />
-
-        <image class="section-img" mode="widthFix" src="@/assets/images/video_2.png" />
-
-        <image class="section-img" mode="widthFix" src="@/assets/images/video_3.png" />
-
-        <image class="section-img" mode="widthFix" src="@/assets/images/video_4.png" />
-
-        <image class="section-img" mode="widthFix" src="@/assets/images/video_5.png" />
+        <image class="section-img" mode="widthFix" src="@/assets/images/video/1.png" />
+        <image class="section-img" mode="widthFix" src="@/assets/images/video/2.png" />
+        <image class="section-img" mode="widthFix" src="@/assets/images/video/3.png" />
+        <image class="section-img" mode="widthFix" src="@/assets/images/video/4.png" />
+        <image class="section-img" mode="widthFix" src="@/assets/images/video/5.png" />
         <view class="footer">
             <view class="btn-box">
                 <template v-if="isWeixin()">
                     <wx-open-launch-weapp
                         id="launch-btn"
                         appid="wxae7a96d1560b3ebc"
-                        path="pages/home/index"
+                        path="pages/productDetail/index?productKey=EQ_P_0000002"
                         style="width: 542rpx;height: 90rpx;display: block; background-color: orange; color: #fff; font-size: 24px; text-align: center; line-height: 90rpx; border-radius: 50px; margin-bottom: 20rpx;"
                     >
                         <!-- <template> -->
@@ -25,7 +21,7 @@
                     </wx-open-launch-weapp>
                 </template>
                 <view v-else class="order-btn" @click="openMiniProgram">
-                    <image class="btn-bg" src="@/assets/images/button.png" mode="widthFix" />
+                    <image class="btn-bg" src="@/assets/images/video/button.png" mode="widthFix" />
                 </view>
             </view>
             <view class="footer-text">
@@ -41,12 +37,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useUserStore } from '@/store/modules/user'
 import { wxConfig } from '@/utils/wechat'
 import { isWeixin } from '@/utils/index'
 import { getUrlScheme } from '@/api/index'
-
-const title = useUserStore().username
 
 onMounted(() => {
     if (isWeixin()) {
@@ -62,8 +55,10 @@ const openMiniProgram = () => {
 
 const getScheme = async () => {
     try {
-        const res = await getUrlScheme({ url: '/pages/home/index' })
-        console.log('res', res)
+        const res = await getUrlScheme({ url: '/pages/productDetail/index', param: 'productKey=EQ_P_0000002' })
+        if (res.data?.openLink) {
+            window.location.href = res.data?.openLink
+        }
     } catch (error) {
         //
     }
@@ -80,7 +75,6 @@ const handleOpen = (type) => {
             url: '/pages/authOrder/index'
         })
     }
-    // dialogVisible.value = true
 }
 const handleClose = () => {
     dialogVisible.value = false
@@ -96,16 +90,6 @@ const handleClose = () => {
 .section-img {
     width: 100%;
     display: block;
-}
-
-.bottom-section {
-    padding: 30rpx;
-    background: linear-gradient(135deg, #ff6b35, #ff4500);
-    margin: 20rpx;
-    border-radius: 24rpx;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .order-btn {

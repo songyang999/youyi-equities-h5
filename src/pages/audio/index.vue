@@ -13,10 +13,10 @@
                         id="launch-btn"
                         appid="wxae7a96d1560b3ebc"
                         path="pages/productDetail/index?productKey=EQ_P_0000003"
-                        style="width: 542rpx;height: 90rpx;display: block; background-color: orange; color: #fff; font-size: 24px; text-align: center; line-height: 90rpx; border-radius: 50px; margin-bottom: 20rpx;"
+                        style="width: 542rpx;height: 90rpx;display: block; background: url('https://jingmengvr-pub-new.oss-cn-beijing.aliyuncs.com/equities/h5/button/14.9button.png') no-repeat center center; background-size: 100% 100%; margin-bottom: 20rpx;"
                     >
                         <!-- <template> -->
-                        一键订购
+                        <!-- 一键订购 -->
                         <!-- <img style="width: 542rpx;height: 90rpx;display: block;" src="@/assets/images/button.png" /> -->
                         <!-- </template> -->
                     </wx-open-launch-weapp>
@@ -50,16 +50,22 @@ onMounted(() => {
     }
 })
 
+const openLink = ref('')
 const openMiniProgram = () => {
-    console.log('打开小程序')
+    if (!openLink.value) {
+        uni.showToast({
+            title: '网络错误',
+            icon: 'none',
+        })
+        return
+    }
+    window.location.href = openLink.value
 }
 
 const getScheme = async () => {
     try {
         const res = await getUrlScheme({ url: '/pages/productDetail/index', param: 'productKey=EQ_P_0000003' })
-        if (res.data?.openLink) {
-            window.location.href = res.data?.openLink
-        }
+        openLink.value = res.data?.openLink || ''
     } catch (error) {
         //
     }

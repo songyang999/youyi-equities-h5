@@ -7,21 +7,26 @@
         <image class="section-img" mode="widthFix" src="@/assets/images/video/5.png" />
         <view class="footer">
             <view class="btn-box">
-                <template v-if="isWeixin()">
+                <view v-if="isWeixin()" class="wechat-btn">
+                    <image class="btn-bg" src="https://jingmengvr-pub-new.oss-cn-beijing.aliyuncs.com/equities/h5/button/19.8button.png" mode="widthFix" />
                     <wx-open-launch-weapp
                         id="launch-btn"
                         appid="wxae7a96d1560b3ebc"
                         path="pages/productDetail/index?productKey=EQ_P_0000002"
+                        style="position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            z-index: 10;"
                     >
-                        <script type="text/wxtag-template">
-                            <div style="width: 542rpx;height: 90rpx;display: block; margin-bottom: 20rpx;">
-                                <img style="width: 542rpx;height: 90rpx;display: block;" src="https://jingmengvr-pub-new.oss-cn-beijing.aliyuncs.com/equities/h5/button/19.8button.png" />
-                            </div>
-                        </script>
+                        <component :is="'script'" type="text/wxtag-template">
+                            <view style="width: 100%; height: 100%; background: transparent;"></view>
+                        </component>
                     </wx-open-launch-weapp>
-                </template>
+                </view>
                 <view v-else class="order-btn" @click="openMiniProgram">
-                    <image class="btn-bg" src="@/assets/images/video/button.png" mode="widthFix" />
+                    <image class="btn-bg" src="https://jingmengvr-pub-new.oss-cn-beijing.aliyuncs.com/equities/h5/button/19.8button.png" mode="widthFix" />
                 </view>
             </view>
             <view class="footer-text">
@@ -91,7 +96,13 @@ const handleClose = () => {
     background: #fff;
     min-height: 100vh;
 }
-
+.wechat-btn {
+    width: 542rpx;
+    height: 90rpx;
+    display: block;
+    margin-bottom: 20rpx;
+    position: relative;
+}
 .section-img {
     width: 100%;
     display: block;

@@ -12,12 +12,12 @@
                         id="launch-btn"
                         appid="wxae7a96d1560b3ebc"
                         path="pages/productDetail/index?productKey=EQ_P_0000002"
-                        style="width: 542rpx;height: 90rpx;display: block; background: url('https://jingmengvr-pub-new.oss-cn-beijing.aliyuncs.com/equities/h5/button/19.8button.png') no-repeat center center; background-size: 100% 100%; margin-bottom: 20rpx;"
                     >
-                        <!-- <template> -->
-                        <!-- 一键订购 -->
-                        <!-- <img style="width: 542rpx;height: 90rpx;display: block;" src="@/assets/images/button.png" /> -->
-                        <!-- </template> -->
+                        <script type="text/wxtag-template">
+                            <div style="width: 542rpx;height: 90rpx;display: block; margin-bottom: 20rpx;">
+                                <img style="width: 542rpx;height: 90rpx;display: block;" src="https://jingmengvr-pub-new.oss-cn-beijing.aliyuncs.com/equities/h5/button/19.8button.png" />
+                            </div>
+                        </script>
                     </wx-open-launch-weapp>
                 </template>
                 <view v-else class="order-btn" @click="openMiniProgram">

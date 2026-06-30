@@ -12,7 +12,15 @@ export default defineConfig(() => {
     const additionalData = '@import "~/styles/variable.scss";'
     const config = {
         plugins: [
-            uni(),
+            uni({
+                vueOptions: {
+                  template: {
+                    compilerOptions: {
+                      isCustomElement: (tag) => tag.startsWith('wx-open')
+                    }
+                  }
+                }
+            }),
             AutoImport({
                 imports: ["vue"],
                 resolvers: [VantResolver()],

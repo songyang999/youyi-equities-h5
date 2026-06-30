@@ -1,25 +1,22 @@
 import wx from 'weixin-js-sdk';
 import { getWxConfig } from '@/api/index'
 
-export const wxConfig = async () => {
-    try {
+export const wxConfig = () => new Promise((resolve, reject) => {
         const url = window.location.href.split('#')[0]
-        const res = await getWxConfig({ url })
-        const data = res.data || {}
-        wx.config({
-            appId: data.appId, // 必填，公众号的唯一标识
-            timestamp: data.timestamp, // 必填，生成签名的时间戳
-            nonceStr: data.nonceStr, // 必填，生成签名的随机串
-            signature: data.signature,// 必填，签名
-            jsApiList: [''],
-            openTagList: ['wx-open-launch-weapp']
-        })
-    } catch (error) {
-        //
-        console.log('error', error)
-    }
-
-}
+        getWxConfig({ url }).then(res => {
+            const data = res.data || {}
+            wx.config({
+                appId: data.appId, // 必填，公众号的唯一标识
+                timestamp: data.timestamp, // 必填，生成签名的时间戳
+                nonceStr: data.nonceStr, // 必填，生成签名的随机串
+                signature: data.signature,// 必填，签名
+                jsApiList: ['updateAppMessageShareData'],
+                openTagList: ['wx-open-launch-weapp']
+            })
+            wx.ready(resolve)
+    wx.error(reject)
+        }).catch(reject)
+})
 
 // 微信浏览器内登录
 export const wxLogin = () => {

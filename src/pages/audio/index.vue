@@ -11,8 +11,9 @@
                 <view v-if="isWeixin()" class="wechat-btn">
                     <image class="btn-bg" src="https://jingmengvr-pub-new.oss-cn-beijing.aliyuncs.com/equities/h5/button/14.9button.png" mode="widthFix" />
                     <wx-open-launch-weapp
+                        v-if="isReady"
                         id="launch-btn"
-                        appid="wxae7a96d1560b3ebc"
+                        username="gh_abbe5b81de3e"
                         path="pages/productDetail/index?productKey=EQ_P_0000003"
                         style="position: absolute;
                             top: 0;
@@ -22,7 +23,7 @@
                             z-index: 10;"
                     >
                         <component :is="'script'" type="text/wxtag-template">
-                            <view style="width: 100%; height: 100%; background: transparent;"></view>
+                            <button style="width: 100%; height: 100%; background: transparent;"></button>
                         </component>
                     </wx-open-launch-weapp>
                 </view>
@@ -47,9 +48,11 @@ import { wxConfig } from '@/utils/wechat'
 import { isWeixin } from '@/utils/index'
 import { getUrlScheme } from '@/api/index'
 
-onMounted(() => {
+const isReady = ref(false)
+onMounted(async() => {
     if (isWeixin()) {
-        wxConfig()
+        await wxConfig()
+        isReady.value = true
     } else {
         getScheme()
     }

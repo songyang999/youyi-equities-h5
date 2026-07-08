@@ -5,12 +5,12 @@
         <image class="section-img" mode="widthFix" src="@/assets/images/audio/3.png" />
         <image class="section-img" mode="widthFix" src="@/assets/images/audio/4.png" />
         <image class="section-img" mode="widthFix" src="@/assets/images/audio/5.png" /> -->
-        <image v-for="item in imageList.filter(item => item.index < 6)" :key="item.index" class="section-img" mode="widthFix" :src="item.content" />
+        <image v-for="item in imageList.filter(item => item.index < 6)" :key="item.index" class="section-img" mode="widthFix" :src="`${item.content}?${Date.now()}`" />
         <view class="footer_box"></view>
         <view class="footer">
             <view class="btn-box">
                 <view v-if="isWeixin()" class="wechat-btn">
-                    <image class="btn-bg" :src="btnUrl" mode="widthFix" />
+                    <image class="btn-bg" :src="`${btnUrl}?${Date.now()}`" mode="widthFix" />
                     <view class="money_text">17.7</view>
                     <wx-open-launch-weapp
                         v-if="isReady"
@@ -30,7 +30,7 @@
                     </wx-open-launch-weapp>
                 </view>
                 <view v-else class="wechat-btn" @click="openMiniProgram">
-                    <image class="btn-bg" :src="btnUrl" mode="widthFix" />
+                    <image class="btn-bg" :src="`${btnUrl}?${Date.now()}`" mode="widthFix" />
                     <view class="money_text">17.7</view>
                 </view>
             </view>

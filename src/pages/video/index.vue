@@ -1,14 +1,16 @@
 <template>
     <view class="page">
-        <image class="section-img" mode="widthFix" src="@/assets/images/video/1.png" />
+        <!-- <image class="section-img" mode="widthFix" src="@/assets/images/video/1.png" />
         <image class="section-img" mode="widthFix" src="@/assets/images/video/2.png" />
         <image class="section-img" mode="widthFix" src="@/assets/images/video/3.png" />
         <image class="section-img" mode="widthFix" src="@/assets/images/video/4.png" />
-        <image class="section-img" mode="widthFix" src="@/assets/images/video/5.png" />
+        <image class="section-img" mode="widthFix" src="@/assets/images/video/5.png" /> -->
+        <image v-for="item in imageList.filter(item => item.index < 6)" :key="item.index" class="section-img" mode="widthFix" :src="item.content" />
         <view class="footer">
             <view class="btn-box">
                 <view v-if="isWeixin()" class="wechat-btn">
-                    <image class="btn-bg" src="https://jingmengvr-pub-new.oss-cn-beijing.aliyuncs.com/equities/h5/button/19.8button.png" mode="widthFix" />
+                    <image class="btn-bg" :src="btnUrl" mode="widthFix" />
+                    <view class="money_text">22.0</view>
                     <wx-open-launch-weapp
                         v-if="isReady"
                         id="launch-btn"
@@ -17,18 +19,19 @@
                         style="position: absolute;
                             top: 0;
                             left: 0;
-                            width: 100%;
-                            height: 100%;
+                            width: 271px;
+                            height: 45px;
                             z-index: 10;"
                         @error="handleError"
                     >
                         <component :is="'script'" type="text/wxtag-template">
-                            <button style="width: 100%; height: 100%; background: transparent;"></button>
+                            <div style="width: 271px; height:45px; background: transparent;"></div>
                         </component>
                     </wx-open-launch-weapp>
                 </view>
-                <view v-else class="order-btn" @click="openMiniProgram">
-                    <image class="btn-bg" src="https://jingmengvr-pub-new.oss-cn-beijing.aliyuncs.com/equities/h5/button/19.8button.png" mode="widthFix" />
+                <view v-else class="wechat-btn" @click="openMiniProgram">
+                    <image class="btn-bg" :src="btnUrl" mode="widthFix" />
+                    <view class="money_text">22.0</view>
                 </view>
             </view>
             <view class="footer-text">
@@ -46,7 +49,7 @@
 import { ref, onMounted } from 'vue'
 import { wxConfig } from '@/utils/wechat'
 import { isWeixin } from '@/utils/index'
-import { getUrlScheme } from '@/api/index'
+import { getUrlScheme, getH5Page } from '@/api/index'
 
 const isReady = ref(false)
 onMounted(async() => {
@@ -56,6 +59,7 @@ onMounted(async() => {
     } else {
         getScheme()
     }
+    getH5PageInfo()
 })
 const openLink = ref('')
 const openMiniProgram = () => {
@@ -73,6 +77,19 @@ const getScheme = async () => {
     try {
         const res = await getUrlScheme({ url: '/pages/productDetail/index', param: 'productKey=EQ_P_0000002' })
         openLink.value = res.data?.openLink || ''
+    } catch (error) {
+        //
+    }
+}
+
+const imageList = ref([])
+const btnUrl = ref('')
+const getH5PageInfo = async () => {
+    try {
+        const res = await getH5Page({ attribute: '1' })
+        imageList.value = JSON.parse(res.data?.content || '{}')
+        const data = imageList.value.find(item => item.index === 6)
+        btnUrl.value = data?.content || ''
     } catch (error) {
         //
     }
@@ -105,8 +122,8 @@ const handleError = (error) => {
     min-height: 100vh;
 }
 .wechat-btn {
-    width: 542rpx;
-    height: 90rpx;
+    width: 271px;
+    height: 45px;
     display: block;
     margin-bottom: 20rpx;
     position: relative;
@@ -116,17 +133,21 @@ const handleError = (error) => {
     display: block;
 }
 
-.order-btn {
-    display: block;
-    margin-bottom: 20rpx;
-}
-
 .btn-bg {
     width: 542rpx;
     height: 90rpx;
     display: block;
 }
-
+.money_text {
+    font-size: 50rpx;
+    color: #fff;
+    font-weight: bold;
+    -webkit-text-stroke: 2rpx #ff5c1b;
+    position: absolute;
+    z-index: 2;
+    left: 160rpx;
+    top: 6rpx;
+}
 .footer {
     position: fixed;
     bottom: 0;

@@ -18,12 +18,20 @@ import 'vant/lib/index.css'
 import '@/styles/index.scss'
 import '@/styles/custom-style.scss'
 
+const NODE_ENV = import.meta.env.MODE
+
 export function createApp() {
 	const app = createSSRApp(App)
 	setupStore(app) // 注册store
 	vant(app) // 注册vant组件
-	const vConsole = new Vconsole()
-	app.use(vConsole)
+	if (NODE_ENV === 'dev') {
+		// 提交前需要注释  本地调试使用
+		const vConsole = new Vconsole()
+		app.use(vConsole)
+	} else { // production
+		// 去掉所有console.log
+		window.console.log = function () { }
+	}
 	return {
 		app,
 	};

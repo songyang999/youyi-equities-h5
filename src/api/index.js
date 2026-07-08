@@ -19,3 +19,13 @@ export function getUrlScheme(data) {
         data,
     })
 }
+
+/**
+ * @description: 获取H5页面信息
+ */
+export function getH5Page(data) {
+    return http({
+        url: '/h5/getH5Page',
+        data,
+    })
+}

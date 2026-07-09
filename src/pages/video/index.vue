@@ -53,13 +53,13 @@ import { getUrlScheme, getH5Page } from '@/api/index'
 
 const isReady = ref(false)
 onMounted(async() => {
+    getH5PageInfo()
     if (isWeixin()) {
         await wxConfig()
         isReady.value = true
     } else {
         getScheme()
     }
-    getH5PageInfo()
 })
 const openLink = ref('')
 const openMiniProgram = () => {
@@ -134,19 +134,27 @@ const handleError = (error) => {
 }
 
 .btn-bg {
-    width: 542rpx;
-    height: 90rpx;
+    width: 271px;
+    height: 45px;
     display: block;
 }
 .money_text {
-    font-size: 50rpx;
+    font-size: 24px;
     color: #fff;
     font-weight: bold;
-    -webkit-text-stroke: 2rpx #ff5c1b;
+    -webkit-text-stroke: 1px #ff5c1b;
     position: absolute;
     z-index: 2;
-    left: 160rpx;
-    top: 6rpx;
+    left: 80px;
+    top: 8px;
+    line-height: 1;
+}
+
+/* iOS 字体基线偏低，单独上移 */
+@supports (-webkit-touch-callout: none) {
+    .money_text {
+        top: 6px;
+    }
 }
 .footer {
     position: fixed;

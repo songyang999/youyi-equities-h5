@@ -4,12 +4,18 @@
         <image class="section-img" mode="widthFix" src="@/assets/images/audio/2.png" />
         <image class="section-img" mode="widthFix" src="@/assets/images/audio/3.png" />
         <image class="section-img" mode="widthFix" src="@/assets/images/audio/4.png" />
-        <image class="section-img" mode="widthFix" src="@/assets/images/audio/5.png" /> -->
-        <image v-for="item in imageList.filter(item => item.index < 6)" :key="item.index" class="section-img" mode="widthFix" :src="`${item.content}?${Date.now()}`" />
+        <image class="section-img" mode="widthFix" src="@/assets/images/audio/5.png" />-->
+        <image
+            v-for="item in imageList.filter(item => item.index < 6)"
+            :key="item.index"
+            class="section-img"
+            mode="widthFix"
+            :src="`${item.content}?${Date.now()}`"
+        />
         <view class="footer_box"></view>
         <view class="footer">
             <view class="btn-box">
-                <view v-if="isWeixin()" class="wechat-btn">
+                <!-- <view v-if="isWeixin()" class="wechat-btn">
                     <image class="btn-bg" :src="`${btnUrl}?${Date.now()}`" mode="widthFix" />
                     <view class="money_text">17.7</view>
                     <wx-open-launch-weapp
@@ -32,6 +38,10 @@
                 <view v-else class="wechat-btn" @click="openMiniProgram">
                     <image class="btn-bg" :src="`${btnUrl}?${Date.now()}`" mode="widthFix" />
                     <view class="money_text">17.7</view>
+                </view>-->
+                <view class="wechat-btn" @click="goPage('/pages/signOrder/index?productKey=EQ_P_0000003&price=17.7&attribute=2')">
+                    <image class="btn-bg" :src="`${btnUrl}?${Date.now()}`" mode="widthFix" />
+                    <view class="money_text">17.7</view>
                 </view>
             </view>
             <view class="footer-text">
@@ -40,27 +50,28 @@
                 <text @click="handleOpen(2)">《扣款授权确认书》</text>
             </view>
         </view>
-
-        <dialog-rule v-if="dialogVisible" @close="handleClose" />
     </view>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { wxConfig } from '@/utils/wechat'
-import { isWeixin } from '@/utils/index'
+// import { wxConfig } from '@/utils/wechat'
+import {
+    // isWeixin,
+    goPage
+} from '@/utils/index'
 import { getUrlScheme, getH5Page } from '@/api/index'
 
-const isReady = ref(false)
-onMounted(async() => {
+// const isReady = ref(false)
+onMounted(async () => {
     getH5PageInfo()
-    if (isWeixin()) {
-        await wxConfig()
-        isReady.value = true
-    } else {
-        getScheme()
-    }
-    
+    // if (isWeixin()) {
+    //     await wxConfig()
+    //     isReady.value = true
+    // } else {
+    //     getScheme()
+    // }
+
 })
 
 const openLink = ref('')
@@ -97,21 +108,9 @@ const getH5PageInfo = async () => {
     }
 }
 
-const dialogVisible = ref(false)
 const handleOpen = (type) => {
-    if (type === 1) {
-        uni.navigateTo({
-            url: '/pages/privacyPolicy/index'
-        })
-    } else {
-        uni.navigateTo({
-            url: '/pages/authOrder/index'
-        })
-    }
-    // dialogVisible.value = true
-}
-const handleClose = () => {
-    dialogVisible.value = false
+    const url = type === 1 ? '/pages/privacyPolicy/index' : '/pages/authOrder/index'
+    goPage(url)
 }
 </script>
 

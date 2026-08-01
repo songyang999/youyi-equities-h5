@@ -23,6 +23,12 @@
 			"style": {
 				"navigationBarTitleText": "权益平台隐私保护协议"
 			}
+		},
+		{
+			"path": "pages/signOrder/index",
+			"style": {
+				"navigationBarTitleText": "签约订购"
+			}
 		}
 	],
 	"globalStyle": {

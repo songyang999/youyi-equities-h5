@@ -1,4 +1,10 @@
 :root:root {
-    --van-button-primary-background-color: #2b2bfc;
-    --van-button-primary-border-color: #2b2bfc;
+  --van-button-primary-background-color: #4a88ff;
+  --van-button-primary-border-color: #4a88ff;
+  --van-toast-background-color: rgba(0, 0, 0, 0.75);
+}
+
+.van-toast {
+  background: rgba(0, 0, 0, 0.75) !important;
+  color: #fff !important;
 }

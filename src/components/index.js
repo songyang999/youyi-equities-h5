@@ -1,4 +1,4 @@
-import { Button, List, Cell, CellGroup, Form, Field, Popup, Picker, Toast } from "vant";
+import { Button, List, Cell, CellGroup, Form, Field, Popup, Picker, Toast, Search } from "vant";
 
 export function vant(app) {
     app.use(Button)
@@ -10,4 +10,5 @@ export function vant(app) {
     app.use(Popup)
     app.use(Picker)
     app.use(Toast)
+    app.use(Search)
 }
